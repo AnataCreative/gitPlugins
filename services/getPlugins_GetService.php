@@ -10,15 +10,37 @@ const CRAFT_PUBLIC_INDEX = __DIR__.'/../../../../public/index.php';
 class getPlugins_GetService extends BaseApplicationComponent
 {
 
-	public function getPlugin()
+	public function getPlugin($url)
 	{
 		// Initial state
 		$error = false;
 
-		// Setup
-		// $error = $this->download(UPLOAD_FOLDER.'/ImageResizer-master.zip', UPLOAD_FOLDER.'/ImageResizer-master/', 'https://github.com/engram-design/ImageResizer/archive/master.zip');
+		// Check url
+		$error = $this->checkUrl($url);
 
 		// Return
+		return $error;
+	}
+
+
+
+	/**
+	* @param string $zipTarget
+	* @param string $folderTarget
+	* @param string $downloadUrl
+	*/
+	public function checkUrl($url)
+	{
+		// Get url
+		$zipTarget = '';
+		$folderTarget = '';
+		$downloadUrl = '';
+
+		// Setup
+		$error = $this->download($zipTarget, $folderTarget, $downloadUrl);
+		// $error = $this->download(UPLOAD_FOLDER.'/ImageResizer-master.zip', UPLOAD_FOLDER.'/ImageResizer-master/', 'https://github.com/engram-design/ImageResizer/archive/master.zip');
+
+
 		return $error;
 	}
 

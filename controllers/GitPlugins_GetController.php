@@ -5,7 +5,9 @@ class GitPlugins_getController extends BaseController
 {
 	public function actionGetPlugin()
 	{
-		$error = craft()->getPlugins_get->getPlugin();
+		$url = craft()->request->getPost('url');
+
+		$error = craft()->getPlugins_get->getPlugin($url);
 
 		if ($error) {
 			craft()->userSession->setNotice(Craft::t($error));

@@ -1,5 +1,14 @@
+{% import "_includes/forms" as forms %}
+
 <form method="post">
 	{{ getCsrfInput() }}
+
+	<!-- Url input -->
+	<div class="input">
+		<input type="url" name="url" value="https://github.com/engram-design/ImageResizer" placeholder="Github Url" id="url" class="text fullwidth">
+	</div>
+
+	<!-- Hidden action input -->
 	<input type="hidden" name="action" value="gitPlugins/get/getPlugin">
 
 	<button class="btn" type="submit" data-icon="download">
