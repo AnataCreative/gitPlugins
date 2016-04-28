@@ -25,12 +25,19 @@ class getPlugins_GetService extends BaseApplicationComponent
 
 
 	/**
-	* @param string $zipTarget
-	* @param string $folderTarget
-	* @param string $downloadUrl
+	* @param string $url
 	*/
 	public function checkUrl($url)
 	{
+		/* Check url
+			- has .zip at the end? -> OK,
+				else ->
+				- Remove trailing / if there is one
+				- Add /archive/master.zip
+			- Determin $zipTarget
+			- Determin $folderTarget
+		*/
+
 		// Get url
 		$zipTarget = '';
 		$folderTarget = '';
