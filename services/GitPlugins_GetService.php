@@ -7,7 +7,7 @@ const UPLOAD_FOLDER = CRAFT_FOLDER."/storage/uploads/pluginuploader";
 const CRAFT_CONFIG_GENERAL = CRAFT_FOLDER.'/config/general.php';
 const CRAFT_PUBLIC_INDEX = __DIR__.'/../../../../public/index.php';
 
-class getPlugins_GetService extends BaseApplicationComponent
+class GitPlugins_GetService extends BaseApplicationComponent
 {
 
 	public function getPlugin($url)
@@ -38,16 +38,51 @@ class getPlugins_GetService extends BaseApplicationComponent
 			- Determin $folderTarget
 		*/
 
-		// Get url
-		$zipTarget = '';
-		$folderTarget = '';
-		$downloadUrl = '';
+		// Is Github url?
+		if (strpos($url, 'github') === false) {
+			$error = 'Please enter a Github URL';
+			return $error;
+		}
 
-		// Setup
+		// Determin Download Url
+		if (strpos($url, '.zip')) {
+			// Set
+			$downloadUrl = $url;
+		} else {
+			// Set
+			$downloadUrl = $url;
+			if (substr($downloadUrl, -1) !== '/') {
+				$downloadUrl = $downloadUrl + '/';
+			}
+			$downloadUrl = $downloadUrl + 'archive/master.zip';
+		}
+
+		// Get filename
+		$content = get_headers($url, 1);
+		$content = array_change_key_case($content, CASE_LOWER);
+
+		if ($content['content-disposition']) {
+			$tmp_name = explode('=', $content['content-disposition']);
+
+			if ($tmp_name[1]) {
+				$realfilename = trim($tmp_name[1],'";\'');
+			}
+		} else  {
+			$stripped_url = preg_replace('/\\?.*/', '', $url);
+			$realfilename = basename($stripped_url);
+		}
+
+		// Determin Ziptarget
+		$ziptarget = UPLOAD_FOLDER.'/'.$realfilename;
+
+		// Determin Foltertarget
+		$folderTarget = UPLOAD_FOLDER.'/'.str_replace('.zip', '', $realfilename);
+
+		// Download
 		$error = $this->download($zipTarget, $folderTarget, $downloadUrl);
 		// $error = $this->download(UPLOAD_FOLDER.'/ImageResizer-master.zip', UPLOAD_FOLDER.'/ImageResizer-master/', 'https://github.com/engram-design/ImageResizer/archive/master.zip');
 
-
+		// return
 		return $error;
 	}
 
