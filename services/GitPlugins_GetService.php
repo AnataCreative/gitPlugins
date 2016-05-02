@@ -3,7 +3,7 @@ namespace Craft;
 
 const CRAFT_FOLDER = __DIR__.'/../../..';
 const CRAFT_PLUGIN_FOLDER = CRAFT_FOLDER.'/plugins';
-const UPLOAD_FOLDER = CRAFT_FOLDER."/storage/uploads/pluginuploader";
+const UPLOAD_FOLDER = CRAFT_FOLDER."/storage/uploads/gitPlugins";
 const CRAFT_CONFIG_GENERAL = CRAFT_FOLDER.'/config/general.php';
 const CRAFT_PUBLIC_INDEX = __DIR__.'/../../../../public/index.php';
 
@@ -51,10 +51,12 @@ class GitPlugins_GetService extends BaseApplicationComponent
 		} else {
 			// Set
 			$downloadUrl = $url;
-			if (substr($downloadUrl, -1) !== '/') {
-				$downloadUrl = $downloadUrl + '/';
+
+			if (substr($url, -1) !== '/') {
+				$downloadUrl = $downloadUrl.'/';
 			}
-			$downloadUrl = $downloadUrl + 'archive/master.zip';
+
+			$downloadUrl = $downloadUrl.'archive/master.zip';
 		}
 
 		// Get filename
@@ -73,7 +75,7 @@ class GitPlugins_GetService extends BaseApplicationComponent
 		}
 
 		// Determin Ziptarget
-		$ziptarget = UPLOAD_FOLDER.'/'.$realfilename;
+		$zipTarget = UPLOAD_FOLDER.'/'.$realfilename.'-master.zip';
 
 		// Determin Foltertarget
 		$folderTarget = UPLOAD_FOLDER.'/'.str_replace('.zip', '', $realfilename);
