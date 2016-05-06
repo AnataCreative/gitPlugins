@@ -9,7 +9,7 @@ class GitPluginsPlugin extends BasePlugin
         $_name = 'gitPlugins',
         $_url = 'https://github.com/AnataCreative/gitPlugins',
         $_releaseFeedUrl = '',
-        $_documentationUrl = '',
+        $_documentationUrl = 'https://github.com/AnataCreative/gitPlugins/blob/master/README.md',
         $_description = '',
         $_developer = 'Anata Creative',
         $_developerUrl = 'https://anatacreative.com/',
