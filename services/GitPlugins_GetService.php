@@ -29,15 +29,6 @@ class GitPlugins_GetService extends BaseApplicationComponent
 	*/
 	public function checkUrl($url)
 	{
-		/* Check url
-			- has .zip at the end? -> OK,
-				else ->
-				- Remove trailing / if there is one
-				- Add /archive/master.zip
-			- Determin $zipTarget
-			- Determin $folderTarget
-		*/
-
 		// Is Github url?
 		if (strpos($url, 'github') === false) {
 			$error = 'Please enter a Github URL';
@@ -63,8 +54,10 @@ class GitPlugins_GetService extends BaseApplicationComponent
 		$content = get_headers($url, 1);
 		$content = array_change_key_case($content, CASE_LOWER);
 
-		if ($content['content-disposition']) {
-			$tmp_name = explode('=', $content['content-disposition']);
+		$contentDisposition = isset($content['content-disposition']) ? $content['content-disposition'] : '';
+
+		if ($contentDisposition) {
+			$tmp_name = explode('=', $contentDisposition);
 
 			if ($tmp_name[1]) {
 				$realfilename = trim($tmp_name[1],'";\'');
@@ -78,7 +71,7 @@ class GitPlugins_GetService extends BaseApplicationComponent
 		$zipTarget = UPLOAD_FOLDER.'/'.$realfilename.'-master.zip';
 
 		// Determin Foltertarget
-		$folderTarget = UPLOAD_FOLDER.'/'.str_replace('.zip', '', $realfilename);
+		$folderTarget = UPLOAD_FOLDER.'/'.str_replace('.zip', '', $realfilename).'-master';
 
 		// Download
 		$error = $this->download($zipTarget, $folderTarget, $downloadUrl);
@@ -97,6 +90,8 @@ class GitPlugins_GetService extends BaseApplicationComponent
 	*/
 	public function download($zipTarget, $folderTarget, $downloadUrl)
 	{
+		// TODO: Check if download fails
+
 		file_put_contents($zipTarget,
 			file_get_contents($downloadUrl)
 		);
@@ -179,15 +174,17 @@ class GitPlugins_GetService extends BaseApplicationComponent
 				// Remove zipfile and folder from uploads
 				$this->rrmdir($uploadFolder);
 				unlink($uploadZipFile);
+
+				$error = false;
 			}
 			else {
-				craft()->userSession->setNotice(Craft::t('A plugin with the same name (".$pluginName.") is already uploaded.'));
+				$error = 'A plugin with the same name (".$pluginName.") is already uploaded.';
 			}
-
-			return false;
 		} else {
-			craft()->userSession->setNotice(Craft::t('The uploaded file is not a valid plugin.'));
+			$error = 'The uploaded file is not a valid plugin.';
 		}
+
+		return $error;
 	}
 
 
