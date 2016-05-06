@@ -5,7 +5,7 @@ class GitPlugins_GitWidget extends BaseWidget
 {
     public function getName()
     {
-        return Craft::t('Get Github Plugins');
+        return Craft::t('gitPlugins');
     }
 
     public function getBodyHtml()
