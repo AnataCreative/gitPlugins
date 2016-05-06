@@ -75,7 +75,6 @@ class GitPlugins_GetService extends BaseApplicationComponent
 
 		// Download
 		$error = $this->download($zipTarget, $folderTarget, $downloadUrl);
-		// $error = $this->download(UPLOAD_FOLDER.'/ImageResizer-master.zip', UPLOAD_FOLDER.'/ImageResizer-master/', 'https://github.com/engram-design/ImageResizer/archive/master.zip');
 
 		// return
 		return $error;
@@ -90,13 +89,21 @@ class GitPlugins_GetService extends BaseApplicationComponent
 	*/
 	public function download($zipTarget, $folderTarget, $downloadUrl)
 	{
-		// TODO: Check if download fails
+		$file = @file_get_contents($downloadUrl);
 
-		file_put_contents($zipTarget,
-			file_get_contents($downloadUrl)
-		);
+		if ($file) {
+			if (!is_dir(UPLOAD_FOLDER)) {
+				$error = "Upload folder doesn't exist";
+			} else if (!is_writable(UPLOAD_FOLDER)) {
+				$error = "Can't write plugin to the upload folder";
+			} else {
+				file_put_contents($zipTarget, $file);
 
-		$error = $this->extract($zipTarget, $folderTarget);
+				$error = $this->extract($zipTarget, $folderTarget);
+			}
+		} else {
+			$error = "Can't download plugin";
+		}
 
 		return $error;
 	}
