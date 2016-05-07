@@ -4,7 +4,7 @@ namespace Craft;
 class GitPluginsPlugin extends BasePlugin
 {
 	protected
-		$_version = '1.0.0',
+		$_version = '0.1.0',
 		$_schemaVersion = null,
 		$_name = 'gitPlugins',
 		$_url = 'https://github.com/AnataCreative/gitPlugins',
