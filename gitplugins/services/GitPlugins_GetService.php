@@ -51,27 +51,17 @@ class GitPlugins_GetService extends BaseApplicationComponent
 		}
 
 		// Get filename
-		$content = get_headers($url, 1);
-		$content = array_change_key_case($content, CASE_LOWER);
+		$http_response_header = get_headers($url);
+		$realfilename = $this->get_real_filename($http_response_header, $url);
 
-		$contentDisposition = isset($content['content-disposition']) ? $content['content-disposition'] : '';
-
-		if ($contentDisposition) {
-			$tmp_name = explode('=', $contentDisposition);
-
-			if ($tmp_name[1]) {
-				$realfilename = trim($tmp_name[1],'";\'');
-			}
-		} else  {
-			$stripped_url = preg_replace('/\\?.*/', '', $url);
-			$realfilename = basename($stripped_url);
+		// Determin Ziptarget and folderTarget
+		if (strpos($realfilename, '.zip')) {
+			$zipTarget = UPLOAD_FOLDER.'/'.$realfilename;
+		} else {
+			$zipTarget = UPLOAD_FOLDER.'/'.$realfilename.'-master.zip';
 		}
 
-		// Determin Ziptarget
-		$zipTarget = UPLOAD_FOLDER.'/'.$realfilename.'-master.zip';
-
-		// Determin Foltertarget
-		$folderTarget = UPLOAD_FOLDER.'/'.str_replace('.zip', '', $realfilename).'-master';
+		$folderTarget = str_replace('.zip', '', $zipTarget);
 
 		// Download
 		$error = $this->download($zipTarget, $folderTarget, $downloadUrl);
@@ -178,18 +168,18 @@ class GitPlugins_GetService extends BaseApplicationComponent
 				// Copy folder to craft/plugins
 				$this->recurse_copy($pluginExtractFolder, $pluginInstallFolder);
 
-				// Remove zipfile and folder from uploads
-				$this->rrmdir($uploadFolder);
-				unlink($uploadZipFile);
-
 				$error = false;
 			}
 			else {
-				$error = 'A plugin with the same name (".$pluginName.") is already uploaded.';
+				$error = 'The plugin "'.$pluginName.'" is already uploaded.';
 			}
 		} else {
 			$error = 'The uploaded file is not a valid plugin.';
 		}
+
+		// Remove zipfile and folder from uploads
+		$this->rrmdir($uploadFolder);
+		unlink($uploadZipFile);
 
 		return $error;
 	}
@@ -240,5 +230,27 @@ class GitPlugins_GetService extends BaseApplicationComponent
 	protected function move_uploaded_file($from, $to)
 	{
 		return move_uploaded_file($from, $to);
+	}
+
+
+	/**
+	* @param string $headers
+	* @param string $url
+	*/
+	protected function get_real_filename($headers, $url)
+	{
+		foreach($headers as $header)
+		{
+			if (strpos(strtolower($header),'content-disposition') !== false)
+			{
+				$tmp_name = explode('=', $header);
+				if ($tmp_name[1]) {
+					return trim($tmp_name[1],'";\'');
+				}
+			}
+		}
+
+		$stripped_url = preg_replace('/\\?.*/', '', $url);
+		return basename($stripped_url);
 	}
 }

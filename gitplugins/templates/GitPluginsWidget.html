@@ -1,3 +1,5 @@
+{% if craft.users.can('accessPlugin-gitplugin') %}
+
 {% import "_includes/forms" as forms %}
 
 <style>
@@ -26,7 +28,6 @@
 	}
 </style>
 
-{% if craft.users.can('accessPlugin-gitplugin') %}
 <form method="post">
 	<!-- Csrf -->
 	{{ getCsrfInput() }}
@@ -37,7 +38,7 @@
 	<!-- Widget -->
 	<div class="gitPlugins-widget">
 		<div class="gitPlugins-widget__input">
-			<input type="url" name="url" value="https://github.com/engram-design/ImageResizer" placeholder="Github Url" id="url" class="text fullwidth gitPlugins-widget__input__txt">
+			<input type="url" name="url" value="" placeholder="Github Url" id="url" class="text fullwidth gitPlugins-widget__input__txt">
 		</div>
 		<div class="gitPlugins-widget__action">
 			<button class="btn center gitPlugins-widget__action__btn" type="submit" data-icon="download">
