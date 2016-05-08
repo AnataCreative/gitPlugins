@@ -17,6 +17,7 @@ Get your plugins from Github straight into your Craft CMS.
 
 
 ## Roadmap
+- Add searchbox with the help of the straightupcraft API (https://straightupcraft.com/craft-plugins/api.json)
 - Add optional redirect to plugins-page for easy upload and install.
 - Add a plugin settings page for optional redirect.
 - Change submit to Ajax submit.
