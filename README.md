@@ -11,7 +11,7 @@ Get your plugins from Github straight into your Craft CMS.
 
 
 ## Usage
-1. Get the base-url (https://github.com/AnataCreative/gitPlugins) or zip-url (https://github.com/AnataCreative/gitPlugins/archive/master.zip) for your plugin on Github.
+1. Get the base-url (for example: https://github.com/AnataCreative/gitPlugins) or zip-url (for example: https://github.com/AnataCreative/gitPlugins/archive/master.zip) for your plugin on Github.
 2. Paste it in the input-field and click get.
 3. The plugin will be downloaded and put into your plugins-folder.
 
