@@ -16,6 +16,10 @@ Get your plugins from Github straight into your Craft CMS.
 3. The plugin will be downloaded and put into your plugins-folder.
 
 
+## Credits
+This plugin has started from the plugin uploader (https://github.com/yatryan/craft-plugin-uploader), and still has some parts of it in it. So big thanks to Taylor Ryan for that!
+
+
 ## Roadmap
 - Add optional redirect to plugins-page for easy upload and install.
 - Add a plugin settings page for optional redirect.
