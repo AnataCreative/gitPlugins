@@ -20,9 +20,9 @@ Get your plugins from Github straight into your Craft CMS.
 This plugin has started from the plugin uploader (https://github.com/yatryan/craft-plugin-uploader), and still has some parts of it in it. So big thanks to Taylor Ryan for that!
 
 
+## Contribution
+If you want to contribute of fix a bug, awesome! Just make a pull request to the develop branch and provide some explanation.
+
+
 ## Roadmap
-- Add searchbox with the help of the straightupcraft API (https://straightupcraft.com/craft-plugins/api.json)
-- Add optional redirect to plugins-page for easy upload and install.
-- Add a plugin settings page for optional redirect.
-- Change submit to Ajax submit.
-- Add testing.
+Look for the issues with the tag 'enhancement'. Help is always welcome!
