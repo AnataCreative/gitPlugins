@@ -7,9 +7,8 @@ class GitPlugins_GitWidget extends BaseWidget
 	{
 		return Craft::t('Download Github Plugins');
 	}
-
 	public function getBodyHtml()
 	{
-		return craft()->templates->render('gitPlugins/gitPluginsWidget');
+		return craft()->templates->render('gitplugins/gitPluginsWidget');
 	}
 }
