@@ -14,6 +14,8 @@ Get your plugins from Github straight into your Craft CMS.
 1. Get the base-url (for example: https://github.com/AnataCreative/gitPlugins) or zip-url (for example: https://github.com/AnataCreative/gitPlugins/archive/master.zip) for your plugin on Github.
 2. Paste it in the input-field and click get.
 3. The plugin will be downloaded and put into your plugins-folder.
+4. Go to the plugins page (Settings > Plugins) and install your downloaded plugin.
+5. Be awesome! :fire:
 
 
 ## Credits
@@ -21,8 +23,9 @@ This plugin has started from the plugin uploader (https://github.com/yatryan/cra
 
 
 ## Contribution
-If you want to contribute of fix a bug, awesome! Just make a pull request to the develop branch and provide some explanation.
+If you want to contribute or fix a bug, awesome! :heart_eyes_cat:
+ Just make a pull request to the develop branch and provide some explanation.
 
 
 ## Roadmap
-Look for the issues with the tag 'enhancement'. Help is always welcome!
+Look for the issues with the tag 'enhancement'. Help is always welcome! :blush:
