@@ -23,11 +23,10 @@ This plugin has started from the plugin uploader (https://github.com/yatryan/cra
 
 
 ## Contribution
-If you want to contribute or fix a bug, awesome! :heart_eyes_cat:
-
+Want to contribute or fix a bug? Awesome! :heart_eyes_cat: <br>
 Just make a pull request to the develop branch and provide some explanation.
 
-If you are fixing a bug or adding an enhancement, please assign the issue to yourself, so people know you're working on it.
+If you are fixing a bug or adding an enhancement, please assign the issue to yourself, so people will know you're working on it.
 
 
 ## Roadmap
