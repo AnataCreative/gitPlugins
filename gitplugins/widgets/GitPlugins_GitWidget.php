@@ -9,6 +9,6 @@ class GitPlugins_GitWidget extends BaseWidget
 	}
 	public function getBodyHtml()
 	{
-		return craft()->templates->render('gitplugins/gitPluginsWidget');
+		return craft()->templates->render('gitplugins/GitPluginsWidget');
 	}
 }
