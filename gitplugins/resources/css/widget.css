@@ -1,0 +1,23 @@
+.gitPlugins-widget {
+    display: flex;
+}
+
+.gitPlugins-widget__input {
+    flex: 1 1 70%;
+}
+
+.gitPlugins-widget__row {
+    flex: 1 1 30%;
+}
+
+.gitPlugins-widget__input__txt {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.gitPlugins-widget__action__btn {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-left: 0 !important;
+    margin-left: -1px;
+}

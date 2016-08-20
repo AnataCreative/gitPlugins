@@ -1,33 +1,19 @@
 {% if not craft.users or craft.users.can('accessPlugin-gitplugin') %}
 
+	<!-- Imports -->
 	{% import "_includes/forms" as forms %}
 
-	<style>
-		.gitPlugins-widget {
-			display: flex;
-		}
 
-		.gitPlugins-widget__input {
-			flex: 1 1 70%;
-		}
+	<!-- Assets -->
 
-		.gitPlugins-widget__row {
-			flex: 1 1 30%;
-		}
+	{% includeCssResource 'gitplugins/css/widget.css' %}
+	{% includeCssResource 'gitplugins/css/selectize.css' %}
 
-		.gitPlugins-widget__input__txt {
-			border-top-right-radius: 0 !important;
-			border-bottom-right-radius: 0 !important;
-		}
+	{% includeJsResource 'gitplugins/js/vendors/selectize-standalone-0.12.2.min.js' %}
+	{% includeJsResource 'gitplugins/js/widget.js' %}
 
-		.gitPlugins-widget__action__btn {
-			border-top-left-radius: 0 !important;
-			border-bottom-left-radius: 0 !important;
-			border-left: 0 !important;
-			margin-left: -1px;
-		}
-	</style>
 
+	<!-- Html -->
 	<form method="post">
 		<!-- Csrf -->
 		{{ getCsrfInput() }}
@@ -38,7 +24,8 @@
 		<!-- Widget -->
 		<div class="gitPlugins-widget">
 			<div class="gitPlugins-widget__input">
-				<input type="url" name="url" value="" placeholder="Github Url" id="url" class="text fullwidth gitPlugins-widget__input__txt">
+				<!-- <input type="url" name="url" value="" placeholder="Github Url" id="url" class="text fullwidth gitPlugins-widget__input__txt"> -->
+				<select name="gitplugins-url" id="gitplugins-url" class="selectized repositories" placeholder="Add Github Urls"></select>
 			</div>
 			<div class="gitPlugins-widget__action">
 				<button class="btn center gitPlugins-widget__action__btn" type="submit" data-icon="download">
